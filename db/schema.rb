@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_210510) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.string "body"
+    t.datetime "last_updated_at"
     t.boolean "archived"
     t.boolean "deleted"
     t.string "link"
