@@ -11,12 +11,20 @@ class User < ApplicationRecord
     self.first_name + " " + self.last_name
   end
 
+  def tags
+    Tag.with_user_id(self.id)
+  end
+
+  def notes
+    Note.joins(:folder).where("folders.user_id = ?", self.id)
+  end
+
   private
 
   def create_default_folder
     self.folders.build(name: "Main")
       .notes.build(title: "Welcome", body: "Welcome to Jot Down", archived: false, last_updated_at: DateTime.now(), deleted: false, link: "", link_active: false)
-      .tags.build(name: "welcome")
+      .note_tags.build(tag_id: Tag.find_by(name: "welcome").id)
     self.save!
   end
 end
