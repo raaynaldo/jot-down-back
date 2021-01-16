@@ -19,6 +19,11 @@ class Api::V1::NotesController < ApplicationController
     render_notes(notes)
   end
 
+  def get_note
+    note = Note.find(params[:id])
+    render json: { note: NoteSerializer.new(note) }, status: :ok
+  end
+
   private
 
   def render_notes(notes)

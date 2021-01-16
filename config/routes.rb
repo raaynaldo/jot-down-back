@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       get "/get_notes_in_archived/", to: "notes#get_notes_in_archived"
       get "/get_notes_in_trash/", to: "notes#get_notes_in_trash"
       get "/get_notes_by_tag/:id", to: "notes#get_notes_by_tag"
+      get "/get_notes_by_tag/:id", to: "notes#get_notes_by_tag"
+      get "/get_note/:id", to: "notes#get_note"
     end
   end
 end
