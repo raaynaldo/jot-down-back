@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get "/get_notes_by_tag/:id", to: "notes#get_notes_by_tag"
       get "/get_notes_by_tag/:id", to: "notes#get_notes_by_tag"
       get "/get_note/:id", to: "notes#get_note"
+      post "/save_note/", to: "notes#save_note"
     end
   end
 end

@@ -24,7 +24,23 @@ class Api::V1::NotesController < ApplicationController
     render json: { note: NoteSerializer.new(note) }, status: :ok
   end
 
+  def save_note
+    note = Note.find(note_params[:id])
+    note.title = note_params[:body].split("\n", 2)[0]
+    note.body = note_params[:body]
+    note.last_updated_at = DateTime.now()
+    if note.save
+      render status: :ok
+    else
+      render json: { message: "save failed" }, status: :not_acceptable
+    end
+  end
+
   private
+
+  def note_params
+    params.require("note").permit(:id, :body, :title)
+  end
 
   def render_notes(notes)
     render json: notes, root: "notes", adapter: :json, each_serializer: NoteSerializer, status: :ok
