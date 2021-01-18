@@ -6,7 +6,7 @@ class Tag < ApplicationRecord
 
   before_save :lowercase_name
 
-  scope :with_user_id, ->(user_id) { joins(:notes => :folder).where("notes.deleted = false and notes.archived = false and folders.user_id = ?", user_id).distinct }
+  scope :with_user_id, ->(user_id) { joins(:notes => :folder).where("notes.deleted = false and notes.archived = false and folders.user_id = ?", user_id).distinct.order(:name) }
 
   private
 
