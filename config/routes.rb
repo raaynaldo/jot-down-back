@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get "/get_note/:id", to: "notes#get_note"
       patch "/save_note/", to: "notes#save_note"
       post "/add_note/", to: "notes#add_note"
+      patch "/archive_note", to: "notes#archive_note"
+      patch "/delete_note", to: "notes#delete_note"
+      patch "/move_note", to: "notes#move_note"
     end
   end
 end

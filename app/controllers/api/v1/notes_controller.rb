@@ -43,6 +43,36 @@ class Api::V1::NotesController < ApplicationController
     end
   end
 
+  def archive_note
+    note = Note.find(params[:id])
+    note.archived = params[:archive]
+    if note.save!
+      render status: :ok
+    else
+      render json: { message: "save failed" }, status: :not_acceptable
+    end
+  end
+
+  def delete_note
+    note = Note.find(params[:id])
+    note.deleted = params[:delete]
+    if note.save!
+      render status: :ok
+    else
+      render json: { message: "save failed" }, status: :not_acceptable
+    end
+  end
+
+  def move_note
+    note = Note.find(params[:id])
+    note.folder_id = params[:folder_id]
+    if note.save!
+      render status: :ok
+    else
+      render json: { message: "save failed" }, status: :not_acceptable
+    end
+  end
+
   private
 
   def note_params

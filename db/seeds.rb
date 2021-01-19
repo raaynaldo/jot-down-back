@@ -17,9 +17,11 @@ Tag.create!(id: 1, name: "welcome")
 
 ray = User.create!(first_name: "Raynaldo", last_name: "Sutisna", username: "raynaldo", email: "raynaldo_sutisna@example.com", password: "123", picture: "")
 jake = User.create!(first_name: "Jake", last_name: "Short", username: "jake", email: "jake_short@example.com", password: "123", picture: "")
+puts "User Done!"
 
 delete_tag = Tag.create!(id: 2, name: "delete")
 archived_tag = Tag.create!(id: 3, name: "archived")
+puts "Tag done!"
 
 User.all.each do |user|
   user.folders.create!(name: "code")
@@ -29,5 +31,4 @@ User.all.each do |user|
   user.folders.first.notes.create!([deleted, archived, deleted_and_archived])
   user.folders.second.notes.create!([deleted, archived, deleted_and_archived])
 end
-
-puts "User Done!"
+puts "Folder and Notes done!"
