@@ -73,6 +73,13 @@ class Api::V1::NotesController < ApplicationController
     end
   end
 
+  def delete_permanently_note
+    byebug
+    note = Note.find(params[:id])
+    note.destroy
+    render status: :ok
+  end
+
   private
 
   def note_params

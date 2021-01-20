@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       patch "/archive_note", to: "notes#archive_note"
       patch "/delete_note", to: "notes#delete_note"
       patch "/move_note", to: "notes#move_note"
+      delete "/delete_permanently_note/:id", to: "notes#delete_permanently_note"
     end
   end
 end
