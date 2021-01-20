@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get "/profile", to: "users#show"
 
       get "/get_folders", to: "folders#get_folders"
+      post "create_folder", to: "folders#create_folder"
+      patch "update_folder", to: "folders#update_folder"
 
       get "/get_tags", to: "tags#get_tags"
 
