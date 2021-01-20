@@ -1,6 +1,6 @@
 class Api::V1::FoldersController < ApplicationController
   def get_folders
-    render json: current_user.folders, root: "folders", adapter: :json, each_serializer: FolderSerializer, status: :ok
+    render json: current_user.folders.order(:name), root: "folders", adapter: :json, each_serializer: FolderSerializer, status: :ok
   end
 
   def create_folder
@@ -13,7 +13,6 @@ class Api::V1::FoldersController < ApplicationController
   end
 
   def update_folder
-    byebug
     folder = Folder.find(params[:id])
     folder.name = params[:name]
     if folder.save!
