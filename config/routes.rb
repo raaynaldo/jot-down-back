@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       patch "/delete_note", to: "notes#delete_note"
       patch "/move_note", to: "notes#move_note"
       delete "/delete_permanently_note/:id", to: "notes#delete_permanently_note"
+
+      post "/add_note_tag", to: "note_tags#add_note_tag"
+      post "/remove_note_tag", to: "note_tags#remove_note_tag"
     end
   end
 end

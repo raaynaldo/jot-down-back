@@ -34,7 +34,7 @@ class Api::V1::NotesController < ApplicationController
       note = Note.new(folder_id: params[:id])
     elsif params[:type] === Note::FOLDER_TYPES[:tag]
       tag = Tag.find(params[:id])
-      note = Note.new(body: "\n##{tag.name}", tags: [tag], folder_id: current_user.folders.first.id)
+      note = Note.new(tags: [tag], folder_id: current_user.folders.first.id)
     end
     if note.save!
       render json: { note: { id: note.id } }, status: :ok
@@ -74,7 +74,6 @@ class Api::V1::NotesController < ApplicationController
   end
 
   def delete_permanently_note
-    byebug
     note = Note.find(params[:id])
     note.destroy
     render status: :ok
