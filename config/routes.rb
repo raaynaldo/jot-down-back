@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "/get_folders", to: "folders#get_folders"
       post "create_folder", to: "folders#create_folder"
       patch "update_folder", to: "folders#update_folder"
+      delete "delete_folder/:id", to: "folders#delete_folder"
 
       get "/get_tags", to: "tags#get_tags"
 

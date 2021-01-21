@@ -1,6 +1,6 @@
 class Note < ApplicationRecord
   belongs_to :folder
-  has_many :note_tags
+  has_many :note_tags, dependent: :destroy
   has_many :tags, through: :note_tags
 
   scope :with_folder_id, ->(folder_id) { joins(:folder).where("notes.deleted = false and notes.archived = false and folders.id = ?", folder_id).order(last_updated_at: :desc) }

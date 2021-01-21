@@ -21,4 +21,10 @@ class Api::V1::FoldersController < ApplicationController
       render json: { message: "save failed" }, status: :not_acceptable
     end
   end
+
+  def delete_folder
+    folder = Folder.find(params[:id])
+    folder.destroy()
+    render status: :ok
+  end
 end
