@@ -26,6 +26,31 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update_picture
+    user = current_user
+    if params[:pictureType] == User::PICTURE_TYPES[:file]
+      user.picture_active_record.attach(params[:picture])
+      user.picture = url_for(user.picture_active_record)
+    elsif params[:pictureType] == User::PICTURE_TYPES[:camera]
+      blob = ActiveStorage::Blob.create_after_upload!(
+        io: StringIO.new((Base64.decode64(params[:picture].split(",")[1]))),
+        filename: "#{current_user.first_name + current_user.last_name}.png",
+        content_type: "image/png",
+      )
+      user.picture_active_record.attach(blob)
+      user.picture = url_for(user.picture_active_record)
+    elsif params[:pictureType] == User::PICTURE_TYPES[:clear]
+      user.picture_active_record.purge
+      user.picture = ""
+    end
+
+    if user.save
+      render json: { picture: user.picture }, status: :ok
+    else
+      render json: { message: "failed to update picture", errors: new_user.errors }, status: :not_acceptable
+    end
+  end
+
   private
 
   def user_params

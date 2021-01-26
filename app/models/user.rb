@@ -1,9 +1,16 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :folders, -> { includes :notes }
+  has_one_attached :picture_active_record
 
   validates :first_name, :last_name, presence: true
   validates :email, :username, presence: true, uniqueness: true
+
+  PICTURE_TYPES = {
+    file: "0",
+    camera: "1",
+    clear: "2",
+  }
 
   after_create :create_default_folder
 

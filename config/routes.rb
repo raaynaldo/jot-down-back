@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
       post "/users", to: "users#create"
       get "/profile", to: "users#show"
-      post "/update_name", to: "users#update_name"
+      patch "/update_name", to: "users#update_name"
+      patch "/update_picture", to: "users#update_picture"
 
       get "/get_folders", to: "folders#get_folders"
       post "create_folder", to: "folders#create_folder"
