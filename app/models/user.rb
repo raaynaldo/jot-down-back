@@ -13,6 +13,7 @@ class User < ApplicationRecord
   }
 
   after_create :create_default_folder
+  after_initialize :init
 
   def full_name
     self.first_name + " " + self.last_name
@@ -27,6 +28,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def init
+    self.picture ||= ""
+  end
 
   def create_default_folder
     self.folders.build(name: "Main")
