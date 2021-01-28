@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :folders, -> { includes :notes }
+  has_many :folders, -> { includes :notes }, dependent: :destroy
   has_one_attached :picture_active_record
 
   validates :first_name, :last_name, presence: true

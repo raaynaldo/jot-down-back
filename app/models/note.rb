@@ -14,10 +14,11 @@ class Note < ApplicationRecord
     trash: "trash",
     tag: "tag",
   }
-  
-  after_initialize  :init
+
+  after_initialize :init
 
   private
+
   def init
     self.title ||= ""
     self.body ||= ""
